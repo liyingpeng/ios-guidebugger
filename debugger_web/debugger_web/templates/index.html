@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>this is my first django html</title>
+	{% load staticfiles %}
+	<link rel="stylesheet" type="text/css" href="{% static "css/index.css" %}">
+	<script type="text/javascript" src="{% static "js/jquery-2.1.1.min.js" %}"></script>
+	<script type="text/javascript" src="{% static "lib/zTree_v3/js/jquery.ztree.core-3.5.js" %}"></script>
+	<script type="text/javascript" src="{% static "js/index.js" %}"></script>
+</head>
+<body>
+<div name="datadiv" id="datadiv" class="datadiv">
+	<p class="hidden" id="p_data">{{ jsonData }}</p> 
+	<p class="hidden" id="p_ip">{{ client_ip }}</p>
+</div>
+
+<button type="button" id="btn_disconnect" class="btn">关闭链接</button>
+
+<div name="formdiv" class="form">
+	<div id="noselect" class="noselect">
+		<span>No Selection</span>
+	</div>
+	<form name="viewForm" id="viewForm" action="" method="post">
+	</form>
+</div>
+
+<script type="text/javascript">
+	datalist = JSON.parse($('#p_data').text());
+	parseData(datalist, $('#datadiv'));
+	closeStatus({{ isconnected }});
+</script>
+</body>
+</html>
