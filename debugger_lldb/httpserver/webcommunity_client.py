@@ -31,6 +31,3 @@ def sendRequest(url, param, callback):
     """
     requests.post(baseUrl + url, param)
     callback()
-
-if __name__ == '__main__':
-    pass

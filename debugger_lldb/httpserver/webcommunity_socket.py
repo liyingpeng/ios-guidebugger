@@ -77,6 +77,3 @@ class CommandDispatcher(object):
     def _addborder_command(self, dataInfo):
         address = dataInfo['address'].encode('utf-8')
         self.displaySetting.setViewBorder(address)
-
-if __name__ == '__main__':
-    pass

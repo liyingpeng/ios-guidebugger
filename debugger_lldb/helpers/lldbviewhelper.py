@@ -57,7 +57,7 @@ class DisplaySetting(object):
             lldb.debugger.HandleCommand(
                 'p (void)[%s setBorderWidth:(CGFloat)%s]' % (layer, width))
             lldb.debugger.HandleCommand(
-                'p (void)[%s setBorderColor:(CGColorRef)[(id)[%s %sColor] CGColor]]' % (layer, colorClass, color))
+                'p (void)[%s setBorderColor:(CGColorRef)[[%s %sColor] CGColor]]' % (layer, colorClass, color))
 
         if self.lastModify:
             self.unBorderedView()
@@ -79,7 +79,7 @@ class DisplaySetting(object):
             _setBorder(layer, 2.0, "red", 'UIColor')
             self.lastModify = obj
 
-        lldb.debugger.HandleCommand('caflush')
+        self._flushCoreAnimationTransaction()
 
     def unBorderedView(self):
         """
@@ -90,7 +90,7 @@ class DisplaySetting(object):
         """
         def _setUnborder(layer):
             lldb.debugger.HandleCommand(
-                'eobjc (void)[%s setBorderWidth:(CGFloat)%s]' % (layer, 0))
+                'p (void)[%s setBorderWidth:(CGFloat)%s]' % (layer, 0))
 
         obj = self.lastModify
         depth = 0
@@ -156,6 +156,3 @@ class _FunctionalView(object):
             return base.evaluateExpression('(CALayer *)[%s layer]' % viewOrLayer)
         else:
             raise Exception('Argument must be a CALayer, UIView, or NSView.')
-
-if __name__ == '__main__':
-    pass

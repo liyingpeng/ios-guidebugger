@@ -62,9 +62,7 @@ def adddata(request):
             socket_dic[client_ip] = sock
         else:
             socket_dic[client_ip] = sock
-        print 'add data session'
         request.session['isconnected'] = 1
-        print request.session['isconnected']
 
     t = Thread(target=_accept)
     t.start()
@@ -76,7 +74,6 @@ def showdata(request):
     """
     Django funciton to deal with http request(show data request)
     """
-    print 'show data session'
     if 'isconnected' in request.session:
         print request.session['isconnected']
     else:
